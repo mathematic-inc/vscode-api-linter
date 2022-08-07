@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/mathematic-inc/vscode-api-linter/compare/v1.0.2...v1.1.0) (2022-08-07)
+
+
+### Features
+
+* show compiler errors ([6774680](https://github.com/mathematic-inc/vscode-api-linter/commit/677468098fa8783f9e78050ae0cf970193aeb45f))
+
 ## [1.0.2](https://github.com/mathematic-inc/vscode-api-linter/compare/v1.0.1...v1.0.2) (2022-08-07)
 
 

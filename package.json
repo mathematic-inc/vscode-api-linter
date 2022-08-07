@@ -1,0 +1,74 @@
+{
+  "name": "mathematic.vscode-api-linter",
+  "description": "Lint Protobuf API files using API Linter",
+  "displayName": "API Linter",
+  "license": "Apache-2.0",
+  "publisher": "mathematic",
+  "repository": "https://github.com/mathematic-inc/vscode-api-linter",
+  "version": "0.0.0",
+  "engines": {
+    "vscode": "^1.69.1"
+  },
+  "categories": [
+    "Linters"
+  ],
+  "activationEvents": [
+    "onCommand:apiLinter.lint",
+    "onLanguage:proto3",
+    "onLanguage:proto"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "configuration": {
+      "type": "object",
+      "title": "API Linter",
+      "properties": {
+        "apiLinter.command": {
+          "type": "array",
+          "default": [
+            "api-linter"
+          ],
+          "description": "Command to run for API linter."
+        },
+        "apiLinter.configFile": {
+          "type": "string",
+          "default": ".apilinter.yml",
+          "description": "Path to a config file for API linter. If the file does not exist, a config will not be used."
+        },
+        "apiLinter.protoPaths": {
+          "type": "array",
+          "default": [],
+          "description": "Include paths to use for proto imports."
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "apiLinter.lint",
+        "title": "API Linter: Lint the current file"
+      }
+    ]
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "deploy": "vsce publish --yarn",
+    "lint": "eslint src --ext ts",
+    "pretest": "yarn compile && yarn lint",
+    "vscode:prepublish": "yarn compile",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.2.0",
+    "@types/mocha": "^9.1.1",
+    "@types/node": "18.x",
+    "@types/vscode": "^1.69.1",
+    "@typescript-eslint/eslint-plugin": "^5.32.0",
+    "@typescript-eslint/parser": "^5.32.0",
+    "@vscode/test-electron": "^2.1.5",
+    "eslint": "^8.21.0",
+    "glob": "^8.0.3",
+    "mocha": "^10.0.0",
+    "typescript": "^4.7.4",
+    "vsce": "^2.10.0"
+  }
+}

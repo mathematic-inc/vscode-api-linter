@@ -47,7 +47,8 @@ export function activate() {
 
     const config = vscode.workspace.getConfiguration("apiLinter");
 
-    // Set the command and check for existence.
+    // Set the command and workspace and check for existence.
+    linter.setWorkspacePath(workspaceFolder.uri.fsPath);
     linter.setCommand(config.get("command") as string[]);
     if (!linter.isInstalled()) {
       vscode.window.showErrorMessage(

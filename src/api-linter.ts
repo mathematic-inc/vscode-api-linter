@@ -44,6 +44,7 @@ export class APILinter {
   #configFile?: string;
   #protoPaths: string[] = [];
   #command: string[] = ["api-linter"];
+  #workspacePath?: string;
 
   #isInstalled = false;
   #isInstallationChecked = false;
@@ -78,6 +79,10 @@ export class APILinter {
     this.#updateArguments();
   }
 
+  setWorkspacePath(workspacePath: string) {
+    this.#workspacePath = workspacePath;
+  }
+
   isInstalled(): boolean {
     if (this.#isInstallationChecked) {
       return this.#isInstalled;
@@ -86,7 +91,7 @@ export class APILinter {
     const result = cp.spawnSync(
       this.#command[0],
       [...this.#command.slice(1), "-h"],
-      { encoding: "utf-8" }
+      { cwd: this.#workspacePath, encoding: "utf-8" }
     );
     return (this.#isInstalled = result.status === 2);
   }
@@ -95,7 +100,7 @@ export class APILinter {
     const result = cp.spawnSync(
       this.#command[0],
       [...this.#command.slice(1), file, ...this.#args],
-      { encoding: "utf-8" }
+      { cwd: this.#workspacePath, encoding: "utf-8" }
     );
     if (result.status !== 0) {
       this.#channel.appendLine(JSON.stringify(result));

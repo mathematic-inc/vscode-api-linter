@@ -103,11 +103,42 @@ export class APILinter {
       { cwd: this.#workspacePath, encoding: "utf-8" }
     );
     if (result.status !== 0) {
-      this.#channel.appendLine(JSON.stringify(result));
-      vscode.window.showErrorMessage(
-        `Error running \`${JSON.stringify(this.#command.join(" "))}\`.`
-      );
-      return [];
+      return result.stderr
+        .split(" ", 3)[2]
+        .split("\n")
+        .map((line) => {
+          const [badFile, lineNo, columnNo, description] = line.split(":", 4);
+          if (file === badFile) {
+            return new vscode.Diagnostic(
+              toRange({
+                start_position: {
+                  line_number: +lineNo,
+                  column_number: +columnNo,
+                },
+                end_position: {
+                  line_number: +lineNo,
+                  column_number: +columnNo,
+                },
+              }),
+              description,
+              vscode.DiagnosticSeverity.Error
+            );
+          }
+          return new vscode.Diagnostic(
+            toRange({
+              start_position: {
+                line_number: 0,
+                column_number: 0,
+              },
+              end_position: {
+                line_number: 0,
+                column_number: 0,
+              },
+            }),
+            description,
+            vscode.DiagnosticSeverity.Error
+          );
+        });
     }
 
     const output: Output[] = JSON.parse(result.stdout);

@@ -9,6 +9,11 @@
   "engines": {
     "vscode": "^1.69.1"
   },
+  "keywords": [
+    "api-linter",
+    "protobuf",
+    "aip"
+  ],
   "categories": [
     "Linters"
   ],

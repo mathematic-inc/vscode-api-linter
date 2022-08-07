@@ -5,7 +5,7 @@
   "license": "Apache-2.0",
   "publisher": "mathematic",
   "repository": "https://github.com/mathematic-inc/vscode-api-linter",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "engines": {
     "vscode": "^1.69.1"
   },

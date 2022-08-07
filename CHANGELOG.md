@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2](https://github.com/mathematic-inc/vscode-api-linter/compare/v1.0.1...v1.0.2) (2022-08-07)
+
+
+### Bug Fixes
+
+* use workspace path as cwd ([c7db261](https://github.com/mathematic-inc/vscode-api-linter/commit/c7db26114b581b09bf21055fbfe3488a63435198))
+
 ## [1.0.1](https://github.com/mathematic-inc/vscode-api-linter/compare/v1.0.0...v1.0.1) (2022-08-07)
 
 

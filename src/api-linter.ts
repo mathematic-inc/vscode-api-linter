@@ -103,42 +103,32 @@ export class APILinter {
       { cwd: this.#workspacePath, encoding: "utf-8" }
     );
     if (result.status !== 0) {
+      result.stderr = result.stderr.slice(result.stderr.indexOf(" "));
+      result.stderr = result.stderr.slice(result.stderr.indexOf(" "));
+      result.stderr = result.stderr.slice(result.stderr.indexOf(" ") + 1);
       return result.stderr
-        .split(" ", 3)[2]
         .split("\n")
         .map((line) => {
-          const [badFile, lineNo, columnNo, description] = line.split(":", 4);
+          if (!line) {
+            return;
+          }
+          const [badFile, lineNo, columnNo, ...descriptionParts] =
+            line.split(":");
+          const description = descriptionParts.join(":");
           if (file === badFile) {
             return new vscode.Diagnostic(
-              toRange({
-                start_position: {
-                  line_number: +lineNo,
-                  column_number: +columnNo,
-                },
-                end_position: {
-                  line_number: +lineNo,
-                  column_number: +columnNo,
-                },
-              }),
+              new vscode.Range(+lineNo, +columnNo, +lineNo, +columnNo),
               description,
               vscode.DiagnosticSeverity.Error
             );
           }
           return new vscode.Diagnostic(
-            toRange({
-              start_position: {
-                line_number: 0,
-                column_number: 0,
-              },
-              end_position: {
-                line_number: 0,
-                column_number: 0,
-              },
-            }),
+            new vscode.Range(0, 0, 0, 0),
             description,
             vscode.DiagnosticSeverity.Error
           );
-        });
+        })
+        .filter((value): value is vscode.Diagnostic => value !== undefined);
     }
 
     const output: Output[] = JSON.parse(result.stdout);

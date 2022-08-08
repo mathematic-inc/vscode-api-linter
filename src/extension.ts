@@ -67,7 +67,7 @@ export function activate() {
     linter.setProtoPaths(config.get("protoPaths") as string[]);
 
     // Lint the file.
-    const filePath = vscode.workspace.asRelativePath(doc.uri);
+    const filePath = vscode.workspace.asRelativePath(doc.uri, false);
     channel.appendLine(`Linting: ${filePath}`);
     diagnostics.set(doc.uri, linter.lint(filePath));
   });

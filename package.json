@@ -7,7 +7,7 @@
   "repository": "https://github.com/mathematic-inc/vscode-api-linter",
   "version": "1.1.1",
   "engines": {
-    "vscode": "^1.69.1"
+    "vscode": "^1.88.0"
   },
   "keywords": [
     "api-linter",
@@ -18,7 +18,6 @@
     "Linters"
   ],
   "activationEvents": [
-    "onCommand:apiLinter.lint",
     "onLanguage:proto3",
     "onLanguage:proto"
   ],
@@ -56,24 +55,24 @@
   },
   "scripts": {
     "compile": "tsc -p ./",
-    "deploy": "vsce publish --yarn",
+    "deploy": "vsce publish",
     "lint": "eslint src --ext ts",
-    "pretest": "yarn compile && yarn lint",
-    "vscode:prepublish": "yarn compile",
+    "pretest": "npm run compile && npm run lint",
+    "vscode:prepublish": "npm run compile",
     "watch": "tsc -watch -p ./"
   },
   "devDependencies": {
-    "@types/glob": "^7.2.0",
-    "@types/mocha": "^9.1.1",
-    "@types/node": "18.x",
-    "@types/vscode": "^1.69.1",
-    "@typescript-eslint/eslint-plugin": "^5.32.0",
-    "@typescript-eslint/parser": "^5.32.0",
-    "@vscode/test-electron": "^2.1.5",
+    "@types/glob": "^8.1.0",
+    "@types/mocha": "^10.0.6",
+    "@types/node": "20.x",
+    "@types/vscode": "^1.88.0",
+    "@typescript-eslint/eslint-plugin": "^7.7.1",
+    "@typescript-eslint/parser": "^7.7.1",
+    "@vscode/test-electron": "^2.3.9",
     "eslint": "^8.21.0",
-    "glob": "^8.0.3",
-    "mocha": "^10.0.0",
-    "typescript": "^4.7.4",
+    "glob": "^10.3.12",
+    "mocha": "^10.4.0",
+    "typescript": "^5.4.5",
     "vsce": "^2.10.0"
   }
 }

@@ -1,7 +1,6 @@
 name: Publish
 
 on:
-  workflow_dispatch:
   push:
     tags:
       - v*
@@ -17,10 +16,10 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3.4.1
         with:
-          node-version: 18
+          node-version: 20
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: npm ci
       - name: Publish
-        run: yarn deploy
+        run: npm run deploy
         env:
           VSCE_PAT: ${{ secrets.VSCE_PAT }}

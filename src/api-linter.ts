@@ -96,59 +96,49 @@ export class APILinter {
     return (this.#isInstalled = result.status === 2);
   }
 
-  lint(file: string): vscode.Diagnostic[] {
+  *lint(file: string): Iterable<vscode.Diagnostic> {
+    this.#channel.appendLine(`Linting ${file}...`);
+    this.#channel.appendLine(`Command: ${this.#command.join(" ")} ${file} ${this.#args.join(" ")}`);
     const result = cp.spawnSync(
       this.#command[0],
       [...this.#command.slice(1), file, ...this.#args],
       { cwd: this.#workspacePath, encoding: "utf-8" }
     );
     if (result.status !== 0) {
-      result.stderr = result.stderr.slice(result.stderr.indexOf(" "));
-      result.stderr = result.stderr.slice(result.stderr.indexOf(" "));
-      result.stderr = result.stderr.slice(result.stderr.indexOf(" ") + 1);
-      return result.stderr
-        .split("\n")
-        .map((line) => {
-          if (!line) {
-            return;
-          }
-          const [badFile, lineNo, columnNo, ...descriptionParts] =
-            line.split(":");
-          const description = descriptionParts.join(":");
-          if (file === badFile) {
-            return new vscode.Diagnostic(
-              new vscode.Range(+lineNo, +columnNo, +lineNo, +columnNo),
-              description,
-              vscode.DiagnosticSeverity.Error
-            );
-          }
-          return new vscode.Diagnostic(
-            new vscode.Range(0, 0, 0, 0),
-            description,
+      result.stderr = result.stderr.split(" ").slice(2).join(" ");
+      this.#channel.appendLine(result.stderr);
+      for (const line of result.stderr.split("\n")) {
+        const [fileAndLine, ...messageParts] = line.split(" ");
+        const [filePath, lineNo, column] = fileAndLine.split(":");
+        const message = messageParts.join(" ");
+        if (filePath === file) {
+          yield new vscode.Diagnostic(
+            new vscode.Range(+lineNo - 1, +column, +lineNo - 1, +column),
+            message,
             vscode.DiagnosticSeverity.Error
           );
-        })
-        .filter((value): value is vscode.Diagnostic => value !== undefined);
+        }
+      }
+    } else {
+      const output: Output[] = JSON.parse(result.stdout);
+      if (output.length !== 1) {
+        return;
+      }
+  
+      for (const p of output[0].problems) {
+        const problem = new vscode.Diagnostic(
+          toRange(p.location),
+          p.message,
+          vscode.DiagnosticSeverity.Warning
+        );
+        problem.code = {
+          target: vscode.Uri.parse(p.rule_doc_uri),
+          value: p.rule_id,
+        };
+  
+        yield problem;
+      }
     }
-
-    const output: Output[] = JSON.parse(result.stdout);
-    if (output.length !== 1) {
-      return [];
-    }
-
-    return output[0].problems.map((p) => {
-      const problem = new vscode.Diagnostic(
-        toRange(p.location),
-        p.message,
-        vscode.DiagnosticSeverity.Warning
-      );
-      problem.code = {
-        target: vscode.Uri.parse(p.rule_doc_uri),
-        value: p.rule_id,
-      };
-
-      return problem;
-    });
   }
 
   #updateArguments() {

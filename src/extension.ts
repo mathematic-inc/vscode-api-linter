@@ -68,8 +68,7 @@ export function activate() {
 
     // Lint the file.
     const filePath = vscode.workspace.asRelativePath(doc.uri, false);
-    channel.appendLine(`Linting: ${filePath}`);
-    diagnostics.set(doc.uri, linter.lint(filePath));
+    diagnostics.set(doc.uri, [...linter.lint(filePath)]);
   });
 
   vscode.workspace.onDidSaveTextDocument(() => {

@@ -13,9 +13,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744
+        uses: actions/checkout@163217dfcd28294438ea1c1c149cfaf66eec283e
       - name: Set up Node.js
-        uses: actions/setup-node@2fddd8803e2f5c9604345a0b591c3020ee971a93
+        uses: actions/setup-node@aca7b64a59c0063db8564e0ffdadd3887f1cbae5
       - name: Install dependencies
         run: npm ci
       - name: Publish

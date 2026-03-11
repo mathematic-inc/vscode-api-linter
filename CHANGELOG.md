@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/mathematic-inc/vscode-api-linter/compare/v1.1.2...v1.2.0) (2026-03-11)
+
+
+### Features
+
+* Migrate to pnpm, tsup, and biome for modern toolchain ([#22](https://github.com/mathematic-inc/vscode-api-linter/issues/22)) ([3c2a999](https://github.com/mathematic-inc/vscode-api-linter/commit/3c2a99999917c302ad652eb030334fc7ba5948b9))
+
 ## [1.1.2](https://github.com/mathematic-inc/vscode-api-linter/compare/v1.1.1...v1.1.2) (2024-04-29)
 
 

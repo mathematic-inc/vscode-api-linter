@@ -1,6 +1,6 @@
+import * as fs from "node:fs";
+import * as path from "node:path";
 import * as vscode from "vscode";
-import * as fs from "fs";
-import * as path from "path";
 import { APILinter } from "./api-linter";
 
 const diagnostics = vscode.languages.createDiagnosticCollection("apiLinter");
@@ -12,9 +12,9 @@ function findConfigFile(
   if (path.isAbsolute(configFilePath) && fs.existsSync(configFilePath)) {
     return configFilePath;
   }
-  configFilePath = path.join(workspaceDir, configFilePath);
-  if (fs.existsSync(configFilePath)) {
-    return configFilePath;
+  const resolvedPath = path.join(workspaceDir, configFilePath);
+  if (fs.existsSync(resolvedPath)) {
+    return resolvedPath;
   }
 }
 
@@ -23,7 +23,7 @@ export function activate() {
   const linter = new APILinter(channel);
 
   vscode.commands.registerCommand("apiLinter.lint", () => {
-    let editor = vscode.window.activeTextEditor;
+    const editor = vscode.window.activeTextEditor;
     if (!editor) {
       return;
     }

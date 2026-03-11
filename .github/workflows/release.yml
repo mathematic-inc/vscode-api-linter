@@ -115,9 +115,11 @@ jobs:
         with:
           pat: ${{ secrets.OPEN_VSX_TOKEN }}
           extensionFile: ${{ steps.vsix.outputs.file }}
+          skipDuplicate: true
       - name: Publish to VS Marketplace
         uses: HaaLeo/publish-vscode-extension@ca5561daa085dee804bf9f37fe0165785a9b14db # v2
         with:
           pat: ${{ secrets.VS_MARKETPLACE_TOKEN }}
           registryUrl: https://marketplace.visualstudio.com
           extensionFile: ${{ steps.vsix.outputs.file }}
+          skipDuplicate: true

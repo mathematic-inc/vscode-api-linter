@@ -1,5 +1,25 @@
 # Changelog
 
+## [1.3.0](https://github.com/mathematic-inc/vscode-api-linter/compare/v1.2.0...v1.3.0) (2026-03-11)
+
+
+### Features
+
+* Initial commit ([1d4b632](https://github.com/mathematic-inc/vscode-api-linter/commit/1d4b632c0ad51f7ba9a4b68169b7c78236590319))
+* Migrate to pnpm, tsup, and biome for modern toolchain ([#22](https://github.com/mathematic-inc/vscode-api-linter/issues/22)) ([3c2a999](https://github.com/mathematic-inc/vscode-api-linter/commit/3c2a99999917c302ad652eb030334fc7ba5948b9))
+* Show compiler errors ([6774680](https://github.com/mathematic-inc/vscode-api-linter/commit/677468098fa8783f9e78050ae0cf970193aeb45f))
+
+
+### Bug Fixes
+
+* Add keywords ([685cc4f](https://github.com/mathematic-inc/vscode-api-linter/commit/685cc4f91445b36231596c9c1c1fc4809dea5d64))
+* Fix missing diagnostics ([e704260](https://github.com/mathematic-inc/vscode-api-linter/commit/e704260f565c52864d4c6729afe09e3e56e20c2d))
+* Resolve VSIX file path before publishing extensions ([#26](https://github.com/mathematic-inc/vscode-api-linter/issues/26)) ([4a456ea](https://github.com/mathematic-inc/vscode-api-linter/commit/4a456eab1a68f77c9af6b69cdc90e52def148121))
+* Resolve VSIX file path before publishing extensions ([#28](https://github.com/mathematic-inc/vscode-api-linter/issues/28)) ([6661382](https://github.com/mathematic-inc/vscode-api-linter/commit/66613823e07f5b4adbf9aa112190e6dbcb40a01b))
+* Skip duplicate when publishing VSCode extension ([#30](https://github.com/mathematic-inc/vscode-api-linter/issues/30)) ([3191eb9](https://github.com/mathematic-inc/vscode-api-linter/commit/3191eb96bf5134063bee989604d193ac37fd4262))
+* Update dependencies and fix error message positioning ([f907aa3](https://github.com/mathematic-inc/vscode-api-linter/commit/f907aa32011adb4b97caabe303ee820c287687ea))
+* Use workspace path as cwd ([c7db261](https://github.com/mathematic-inc/vscode-api-linter/commit/c7db26114b581b09bf21055fbfe3488a63435198))
+
 ## [1.2.0](https://github.com/mathematic-inc/vscode-api-linter/compare/v1.1.2...v1.2.0) (2026-03-11)
 
 

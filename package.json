@@ -2,17 +2,25 @@
   "name": "mathematic-vscode-api-linter",
   "description": "Lint Protobuf API files using API Linter",
   "displayName": "API Linter",
+  "author": "Mathematic Inc",
   "license": "Apache-2.0",
   "publisher": "mathematic",
-  "repository": "https://github.com/mathematic-inc/vscode-api-linter",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mathematic-inc/vscode-api-linter.git"
+  },
   "version": "1.1.2",
+  "packageManager": "pnpm@10.31.0+sha512.e3927388bfaa8078ceb79b748ffc1e8274e84d75163e67bc22e06c0d3aed43dd153151cbf11d7f8301ff4acb98c68bdc5cadf6989532801ffafe3b3e4a63c268",
   "engines": {
-    "vscode": "^1.88.0"
+    "vscode": "^1.110.0"
   },
   "keywords": [
     "api-linter",
     "protobuf",
-    "aip"
+    "proto3",
+    "aip",
+    "grpc",
+    "linter"
   ],
   "categories": [
     "Linters"
@@ -21,7 +29,7 @@
     "onLanguage:proto3",
     "onLanguage:proto"
   ],
-  "main": "./out/extension.js",
+  "main": "./dist/extension.js",
   "contributes": {
     "configuration": {
       "type": "object",
@@ -54,25 +62,35 @@
     ]
   },
   "scripts": {
-    "compile": "tsc -p ./",
-    "deploy": "vsce publish",
-    "lint": "eslint src --ext ts",
-    "pretest": "npm run compile && npm run lint",
-    "vscode:prepublish": "npm run compile",
-    "watch": "tsc -watch -p ./"
+    "vscode:prepublish": "pnpm run package",
+    "build": "tsup",
+    "watch": "tsup --watch",
+    "package": "tsup --minify",
+    "lint": "ultracite check",
+    "format": "ultracite fix",
+    "prepare": "test -n \"$CI\" || lefthook install",
+    "deploy": "vsce publish"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@biomejs/biome",
+      "esbuild",
+      "lefthook"
+    ]
   },
   "devDependencies": {
-    "@types/glob": "^8.1.0",
-    "@types/mocha": "^10.0.6",
-    "@types/node": "20.x",
-    "@types/vscode": "^1.88.0",
-    "@typescript-eslint/eslint-plugin": "^7.7.1",
-    "@typescript-eslint/parser": "^7.7.1",
-    "@vscode/test-electron": "^2.3.9",
-    "eslint": "^8.21.0",
-    "glob": "^10.3.12",
-    "mocha": "^10.4.0",
-    "typescript": "^5.4.5",
-    "vsce": "^2.10.0"
+    "@biomejs/biome": "^2.4.6",
+    "@types/glob": "^9.0.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^25.4.0",
+    "@types/vscode": "^1.110.0",
+    "@vscode/test-electron": "^2.5.2",
+    "glob": "^13.0.6",
+    "lefthook": "^2.1.3",
+    "mocha": "^11.7.5",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3",
+    "ultracite": "^7.2.5",
+    "vsce": "^2.15.0"
   }
 }

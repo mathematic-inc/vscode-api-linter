@@ -1,5 +1,5 @@
+import * as cp from "node:child_process";
 import * as vscode from "vscode";
-import * as cp from "child_process";
 
 interface Output {
   file_path: string;
@@ -7,20 +7,20 @@ interface Output {
 }
 
 interface Problem {
-  message: string;
-  rule_id: string;
-  rule_doc_uri: string;
   location: Location;
+  message: string;
+  rule_doc_uri: string;
+  rule_id: string;
 }
 
 interface Location {
-  start_position: Position;
   end_position: Position;
+  start_position: Position;
 }
 
 interface Position {
-  line_number: number;
   column_number: number;
+  line_number: number;
 }
 
 function toRange(location: Location): vscode.Range {
@@ -40,7 +40,7 @@ export interface APILinterOptions {
 }
 
 export class APILinter {
-  #channel: vscode.OutputChannel;
+  readonly #channel: vscode.OutputChannel;
   #configFile?: string;
   #protoPaths: string[] = [];
   #command: string[] = ["api-linter"];
@@ -93,12 +93,15 @@ export class APILinter {
       [...this.#command.slice(1), "-h"],
       { cwd: this.#workspacePath, encoding: "utf-8" }
     );
-    return (this.#isInstalled = result.status === 2);
+    this.#isInstalled = result.status === 2;
+    return this.#isInstalled;
   }
 
   *lint(file: string): Iterable<vscode.Diagnostic> {
     this.#channel.appendLine(`Linting ${file}...`);
-    this.#channel.appendLine(`Command: ${this.#command.join(" ")} ${file} ${this.#args.join(" ")}`);
+    this.#channel.appendLine(
+      `Command: ${this.#command.join(" ")} ${file} ${this.#args.join(" ")}`
+    );
     const result = cp.spawnSync(
       this.#command[0],
       [...this.#command.slice(1), file, ...this.#args],
@@ -124,7 +127,7 @@ export class APILinter {
       if (output.length !== 1) {
         return;
       }
-  
+
       for (const p of output[0].problems) {
         const problem = new vscode.Diagnostic(
           toRange(p.location),
@@ -135,7 +138,7 @@ export class APILinter {
           target: vscode.Uri.parse(p.rule_doc_uri),
           value: p.rule_id,
         };
-  
+
         yield problem;
       }
     }

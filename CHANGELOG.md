@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.1](https://github.com/mathematic-inc/vscode-api-linter/compare/v1.2.0...v1.2.1) (2026-03-11)
+
+
+### Bug Fixes
+
+* Resolve VSIX file path before publishing extensions ([#26](https://github.com/mathematic-inc/vscode-api-linter/issues/26)) ([4a456ea](https://github.com/mathematic-inc/vscode-api-linter/commit/4a456eab1a68f77c9af6b69cdc90e52def148121))
+
 ## [1.2.0](https://github.com/mathematic-inc/vscode-api-linter/compare/v1.1.2...v1.2.0) (2026-03-11)
 
 

@@ -43,7 +43,7 @@ importers:
         version: 5.9.3
       ultracite:
         specifier: ^7.2.5
-        version: 7.2.5
+        version: 7.3.0
       vsce:
         specifier: ^2.15.0
         version: 2.15.0
@@ -1475,8 +1475,8 @@ packages:
   ufo@1.6.3:
     resolution: {integrity: sha512-yDJTmhydvl5lJzBmy/hyOAA0d+aqCBuwl818haVdYCRrWV84o7YyeVm4QlVHStqNrrJSTb6jKuFAVqAFsr+K3Q==}
 
-  ultracite@7.2.5:
-    resolution: {integrity: sha512-Fw+V7P/gzTcVz6wmyYxaw8AGIOYDOilzwEiQq7pDGjrHwqdSzNrzevh1wxk0FTYfSHhk5a+wX02/Ayu8IK/x0A==}
+  ultracite@7.3.0:
+    resolution: {integrity: sha512-lnzknmRmaLNPk2cYCpT+dI78Jyz+0Or1o8XOjHNxeIrBGrbQXZOTNwQjcFeYaQ1Ov5HK1NqPQirmzyMgA4lJSw==}
     hasBin: true
     peerDependencies:
       oxlint: ^1.0.0
@@ -2876,7 +2876,7 @@ snapshots:
 
   ufo@1.6.3: {}
 
-  ultracite@7.2.5:
+  ultracite@7.3.0:
     dependencies:
       '@clack/prompts': 1.1.0
       commander: 14.0.3

@@ -10,7 +10,7 @@
     "url": "https://github.com/mathematic-inc/vscode-api-linter.git"
   },
   "version": "1.2.0",
-  "packageManager": "pnpm@10.32.1",
+  "packageManager": "pnpm@10.33.0",
   "engines": {
     "vscode": "^1.110.0"
   },

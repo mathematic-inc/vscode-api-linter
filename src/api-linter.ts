@@ -90,10 +90,10 @@ export class APILinter {
     this.#isInstallationChecked = true;
     const result = cp.spawnSync(
       this.#command[0],
-      [...this.#command.slice(1), "-h"],
+      [...this.#command.slice(1), "--version"],
       { cwd: this.#workspacePath, encoding: "utf-8" }
     );
-    this.#isInstalled = result.status === 2;
+    this.#isInstalled = result.status === 0;
     return this.#isInstalled;
   }
 

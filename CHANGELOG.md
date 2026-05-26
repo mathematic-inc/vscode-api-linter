@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.1](https://github.com/mathematic-inc/vscode-api-linter/compare/v1.2.0...v1.2.1) (2026-05-26)
+
+### Bug Fixes
+
+- Linter install check ([#129](https://github.com/mathematic-inc/vscode-api-linter/issues/129)) ([0cfc02e](https://github.com/mathematic-inc/vscode-api-linter/commit/0cfc02e1a2bdb9bb262c6d858045d4654de78673))
+- Linter install check ([#78](https://github.com/mathematic-inc/vscode-api-linter/issues/78)) ([0bb05d4](https://github.com/mathematic-inc/vscode-api-linter/commit/0bb05d44d95300e079c8678f911feb3151ca90ab))
+
 ## [1.2.0](https://github.com/mathematic-inc/vscode-api-linter/compare/v1.1.2...v1.2.0) (2026-03-11)
 
 ### Features

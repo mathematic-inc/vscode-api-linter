@@ -2,10 +2,9 @@
 
 ## [1.2.3](https://github.com/mathematic-inc/vscode-api-linter/compare/v1.2.2...v1.2.3) (2026-05-26)
 
-
 ### Bug Fixes
 
-* Emit extension.js for VS Code packaging ([#133](https://github.com/mathematic-inc/vscode-api-linter/issues/133)) ([1962022](https://github.com/mathematic-inc/vscode-api-linter/commit/1962022bbde74b4c634ef1765372004b740e0237))
+- Emit extension.js for VS Code packaging ([#133](https://github.com/mathematic-inc/vscode-api-linter/issues/133)) ([1962022](https://github.com/mathematic-inc/vscode-api-linter/commit/1962022bbde74b4c634ef1765372004b740e0237))
 
 ## [1.2.2](https://github.com/mathematic-inc/vscode-api-linter/compare/v1.2.1...v1.2.2) (2026-05-26)
 

@@ -1,7 +1,7 @@
 ---
 name: Feature request
 about: Suggest an idea for this project
-title: '[FR] {{feature request name}}'
+title: "[FR] {{feature request name}}"
 labels: enhancement
 ---
 

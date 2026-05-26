@@ -32,11 +32,11 @@ Alternatively, install the `api-linter` CLI tool by following the [official inst
 
 The following settings are available under the `apiLinter` namespace in VS Code settings:
 
-| Setting | Type | Default | Description |
-|---|---|---|---|
-| `apiLinter.command` | `array` | `["api-linter"]` | Command to run for API linter. Use this to specify a custom binary or proxy command. |
+| Setting                | Type     | Default            | Description                                                                               |
+| ---------------------- | -------- | ------------------ | ----------------------------------------------------------------------------------------- |
+| `apiLinter.command`    | `array`  | `["api-linter"]`   | Command to run for API linter. Use this to specify a custom binary or proxy command.      |
 | `apiLinter.configFile` | `string` | `".apilinter.yml"` | Path to a config file for API linter. If the file does not exist, no config will be used. |
-| `apiLinter.protoPaths` | `array` | `[]` | Include paths to use for proto imports. |
+| `apiLinter.protoPaths` | `array`  | `[]`               | Include paths to use for proto imports.                                                   |
 
 ### Example: Using a Bazel proxy
 

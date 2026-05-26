@@ -88,7 +88,7 @@
     "onLanguage:proto3"
   ],
   "engines": {
-    "vscode": "^1.110.0"
+    "vscode": "^1.120.0"
   },
   "packageManager": "pnpm@11.3.0"
 }

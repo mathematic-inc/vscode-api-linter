@@ -1,4 +1,5 @@
 import * as cp from "node:child_process";
+
 import * as vscode from "vscode";
 
 interface Output {
@@ -23,7 +24,7 @@ interface Position {
   line_number: number;
 }
 
-function toRange(location: Location): vscode.Range {
+const toRange = (location: Location): vscode.Range => {
   const start = new vscode.Position(
     location.start_position.line_number - 1,
     location.start_position.column_number - 1
@@ -33,7 +34,7 @@ function toRange(location: Location): vscode.Range {
     location.end_position.column_number - 1
   );
   return new vscode.Range(start, end);
-}
+};
 
 export interface APILinterOptions {
   channel: vscode.OutputChannel;
@@ -107,22 +108,7 @@ export class APILinter {
       [...this.#command.slice(1), file, ...this.#args],
       { cwd: this.#workspacePath, encoding: "utf-8" }
     );
-    if (result.status !== 0) {
-      result.stderr = result.stderr.split(" ").slice(2).join(" ");
-      this.#channel.appendLine(result.stderr);
-      for (const line of result.stderr.split("\n")) {
-        const [fileAndLine, ...messageParts] = line.split(" ");
-        const [filePath, lineNo, column] = fileAndLine.split(":");
-        const message = messageParts.join(" ");
-        if (filePath === file) {
-          yield new vscode.Diagnostic(
-            new vscode.Range(+lineNo - 1, +column, +lineNo - 1, +column),
-            message,
-            vscode.DiagnosticSeverity.Error
-          );
-        }
-      }
-    } else {
+    if (result.status === 0) {
       const output: Output[] = JSON.parse(result.stdout);
       if (output.length !== 1) {
         return;
@@ -140,6 +126,21 @@ export class APILinter {
         };
 
         yield problem;
+      }
+    } else {
+      result.stderr = result.stderr.split(" ").slice(2).join(" ");
+      this.#channel.appendLine(result.stderr);
+      for (const line of result.stderr.split("\n")) {
+        const [fileAndLine, ...messageParts] = line.split(" ");
+        const [filePath, lineNo, column] = fileAndLine.split(":");
+        const message = messageParts.join(" ");
+        if (filePath === file) {
+          yield new vscode.Diagnostic(
+            new vscode.Range(+lineNo - 1, +column, +lineNo - 1, +column),
+            message,
+            vscode.DiagnosticSeverity.Error
+          );
+        }
       }
     }
   }

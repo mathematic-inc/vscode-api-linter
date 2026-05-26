@@ -1,7 +1,7 @@
 {
   "name": "mathematic-vscode-api-linter",
   "displayName": "API Linter",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Lint Protobuf API files using API Linter",
   "categories": [
     "Linters"

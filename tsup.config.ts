@@ -5,6 +5,9 @@ export default defineConfig({
   external: ["vscode"],
   format: "cjs",
   outDir: "dist",
+  outExtension({ format }) {
+    return { js: format === "cjs" ? ".js" : ".mjs" };
+  },
   sourcemap: true,
   target: "esnext",
 });

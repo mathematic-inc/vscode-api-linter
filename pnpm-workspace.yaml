@@ -1,0 +1,6 @@
+allowBuilds:
+  esbuild: true
+  keytar: true
+  lefthook: true
+minimumReleaseAgeExclude:
+  - ultracite@7.8.0

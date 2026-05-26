@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.2.2](https://github.com/mathematic-inc/vscode-api-linter/compare/v1.2.1...v1.2.2) (2026-05-26)
+
+### Bug Fixes
+
+- Align engines.vscode with @types/vscode ([#131](https://github.com/mathematic-inc/vscode-api-linter/issues/131)) ([d08ea08](https://github.com/mathematic-inc/vscode-api-linter/commit/d08ea08760d855182801dc3c68d3213cf8678f93))
+
 ## [1.2.1](https://github.com/mathematic-inc/vscode-api-linter/compare/v1.2.0...v1.2.1) (2026-05-26)
 
 ### Bug Fixes

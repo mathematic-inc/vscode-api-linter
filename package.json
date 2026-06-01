@@ -22,7 +22,7 @@
   },
   "publisher": "mathematic",
   "type": "module",
-  "main": "./dist/extension.js",
+  "main": "./dist/extension.cjs",
   "scripts": {
     "vscode:prepublish": "pnpm run package",
     "build": "tsup",

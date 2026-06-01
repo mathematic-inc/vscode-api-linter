@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.4](https://github.com/mathematic-inc/vscode-api-linter/compare/v1.2.3...v1.2.4) (2026-06-01)
+
+
+### Bug Fixes
+
+* Point extension entry at .cjs for ESM package type ([#136](https://github.com/mathematic-inc/vscode-api-linter/issues/136)) ([45b3a64](https://github.com/mathematic-inc/vscode-api-linter/commit/45b3a646963109d01ea758dea46dae257817fdf1))
+
 ## [1.2.3](https://github.com/mathematic-inc/vscode-api-linter/compare/v1.2.2...v1.2.3) (2026-05-26)
 
 ### Bug Fixes

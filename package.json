@@ -45,7 +45,7 @@
     "glob": "^13.0.6",
     "lefthook": "^2.1.8",
     "mocha": "^11.7.6",
-    "oxfmt": "^0.53.0",
+    "oxfmt": "^0.57.0",
     "oxlint": "^1.66.0",
     "tsup": "^8.5.1",
     "typescript": "^6.0.3",
@@ -90,5 +90,5 @@
   "engines": {
     "vscode": "^1.120.0"
   },
-  "packageManager": "pnpm@11.5.2"
+  "packageManager": "pnpm@11.9.0"
 }

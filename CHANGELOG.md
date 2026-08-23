@@ -1,5 +1,30 @@
 # Changelog
 
+## [1.3.0](https://github.com/mathematic-inc/vscode-api-linter/compare/v1.2.4...v1.3.0) (2026-08-23)
+
+
+### Features
+
+* Initial commit ([3f163e3](https://github.com/mathematic-inc/vscode-api-linter/commit/3f163e37c5dce56ae566a793e64acb188062d89f))
+* Migrate to pnpm, tsup, and biome for modern toolchain ([#22](https://github.com/mathematic-inc/vscode-api-linter/issues/22)) ([b654739](https://github.com/mathematic-inc/vscode-api-linter/commit/b65473959f507d34357d09efd36da41f7c46b726))
+* Show compiler errors ([0c20d5d](https://github.com/mathematic-inc/vscode-api-linter/commit/0c20d5dc4ea7e73be837a2acd89e4c88af382f7c))
+
+
+### Bug Fixes
+
+* Add keywords ([99a4a66](https://github.com/mathematic-inc/vscode-api-linter/commit/99a4a667e91c49796194ad74580b07aad05756a4))
+* Align engines.vscode with @types/vscode ([#131](https://github.com/mathematic-inc/vscode-api-linter/issues/131)) ([e241662](https://github.com/mathematic-inc/vscode-api-linter/commit/e241662a29d82ba003f2cc327292ad48411d1190))
+* Emit extension.js for VS Code packaging ([#133](https://github.com/mathematic-inc/vscode-api-linter/issues/133)) ([9c29cc3](https://github.com/mathematic-inc/vscode-api-linter/commit/9c29cc327a8363257e5cf04b8131694b7f35ab08))
+* Fix missing diagnostics ([8617287](https://github.com/mathematic-inc/vscode-api-linter/commit/8617287557c8e0bb10a7c4ceee1394dd1f36f14f))
+* Linter install check ([#129](https://github.com/mathematic-inc/vscode-api-linter/issues/129)) ([7211705](https://github.com/mathematic-inc/vscode-api-linter/commit/72117053640357d3e8cd00c542e0dfd1ae26af07))
+* Linter install check ([#78](https://github.com/mathematic-inc/vscode-api-linter/issues/78)) ([001afd4](https://github.com/mathematic-inc/vscode-api-linter/commit/001afd432dcd3738dc6955150f9e1a29d5cfb4a2))
+* Point extension entry at .cjs for ESM package type ([#136](https://github.com/mathematic-inc/vscode-api-linter/issues/136)) ([899a7ef](https://github.com/mathematic-inc/vscode-api-linter/commit/899a7ef153783233c01295bb6d6f4bf8e68fd3f3))
+* Resolve VSIX file path before publishing extensions ([#26](https://github.com/mathematic-inc/vscode-api-linter/issues/26)) ([691fe0d](https://github.com/mathematic-inc/vscode-api-linter/commit/691fe0dd3e55f4506f874c627996b0e862db9b64))
+* Resolve VSIX file path before publishing extensions ([#28](https://github.com/mathematic-inc/vscode-api-linter/issues/28)) ([075becb](https://github.com/mathematic-inc/vscode-api-linter/commit/075becbfd01d7bf449915fd91ee40ac3b5058130))
+* Skip duplicate when publishing VSCode extension ([#30](https://github.com/mathematic-inc/vscode-api-linter/issues/30)) ([11bf9e0](https://github.com/mathematic-inc/vscode-api-linter/commit/11bf9e050376e6c2795b5122083aabe2530fa2d5))
+* Update dependencies and fix error message positioning ([bf7dea5](https://github.com/mathematic-inc/vscode-api-linter/commit/bf7dea58c9331b97e332b325a45648586012a432))
+* Use workspace path as cwd ([82d32d9](https://github.com/mathematic-inc/vscode-api-linter/commit/82d32d9e23793eb654be5a5940ea0ebc1d53fdb9))
+
 ## [1.2.4](https://github.com/mathematic-inc/vscode-api-linter/compare/v1.2.3...v1.2.4) (2026-06-01)
 
 ### Bug Fixes

@@ -69,7 +69,7 @@ Issues and feature requests can be filed at [github.com/mathematic-inc/vscode-ap
 
 ## Contributing
 
-Start with a [Discussion](../../discussions/new) instead of opening a pull request. If we accept the proposal, a Mathematic maintainer or agent will implement it. See [CONTRIBUTING.md](CONTRIBUTING.md) for the full process.
+Start with a [Discussion](../../discussions/new) instead of opening a pull request. If we accept the proposal, a Mathematic maintainer or agent will implement it. GitHub restricts pull request creation to Mathematic maintainers and repository collaborators with write, maintain, or admin access, plus authorized maintenance agents. See [CONTRIBUTING.md](CONTRIBUTING.md) for the full process.
 
 ## License
 

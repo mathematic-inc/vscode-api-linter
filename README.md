@@ -4,7 +4,7 @@ Lint Protobuf API files using [API Linter](https://linter.aip.dev) in Visual Stu
 
 ## Overview
 
-[API Linter](https://linter.aip.dev) is a linter developed by Google for linting APIs written in [Protocol Buffers](https://developers.google.com/protocol-buffers). It enforces the [Google API Improvement Proposals (AIPs)](https://aip.dev), a set of design guidelines for APIs.
+[API Linter](https://linter.aip.dev) is a linter developed by Google for linting APIs written in [Protocol Buffers](https://protobuf.dev/). It enforces the [Google API Improvement Proposals (AIPs)](https://google.aip.dev/), a set of design guidelines for APIs.
 
 This extension integrates `api-linter` directly into VS Code, providing inline diagnostics as you edit and save `.proto` files.
 
@@ -32,11 +32,11 @@ Alternatively, install the `api-linter` CLI tool by following the [official inst
 
 The following settings are available under the `apiLinter` namespace in VS Code settings:
 
-| Setting | Type | Default | Description |
-| --- | --- | --- | --- |
-| `apiLinter.command` | `array` | `["api-linter"]` | Command to run for API linter. Use this to specify a custom binary or proxy command. |
+| Setting                | Type     | Default            | Description                                                                               |
+| ---------------------- | -------- | ------------------ | ----------------------------------------------------------------------------------------- |
+| `apiLinter.command`    | `array`  | `["api-linter"]`   | Command to run for API linter. Use this to specify a custom binary or proxy command.      |
 | `apiLinter.configFile` | `string` | `".apilinter.yml"` | Path to a config file for API linter. If the file does not exist, no config will be used. |
-| `apiLinter.protoPaths` | `array` | `[]` | Include paths to use for proto imports. |
+| `apiLinter.protoPaths` | `array`  | `[]`               | Include paths to use for proto imports.                                                   |
 
 ### Example: Using a Bazel proxy
 
@@ -69,7 +69,7 @@ Issues and feature requests can be filed at [github.com/mathematic-inc/vscode-ap
 
 ## Contributing
 
-Start with a [Discussion](../../discussions/new) instead of opening a pull request. If we accept the proposal, a Mathematic maintainer or agent will implement it. When we implement your proposal, the pull request will link to the Discussion and credit you as the proposal's original author. GitHub restricts pull request creation to Mathematic maintainers and repository collaborators with write, maintain, or admin access, plus authorized maintenance agents. See [CONTRIBUTING.md](CONTRIBUTING.md) for the full process.
+Start with a [Discussion](https://github.com/mathematic-inc/vscode-api-linter/discussions/new) instead of opening a pull request. If we accept the proposal, a Mathematic maintainer or agent will implement it. When we implement your proposal, the pull request will link to the Discussion and credit you as the proposal's original author. GitHub restricts pull request creation to Mathematic maintainers and repository collaborators with write, maintain, or admin access, plus authorized maintenance agents. See [CONTRIBUTING.md](CONTRIBUTING.md) for the full process.
 
 ## License
 

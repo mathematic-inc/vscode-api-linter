@@ -14,45 +14,35 @@
     "proto3",
     "protobuf"
   ],
-  "license": "Apache-2.0",
-  "author": "Mathematic Inc",
   "repository": {
     "type": "git",
     "url": "https://github.com/mathematic-inc/vscode-api-linter.git"
   },
+  "license": "Apache-2.0",
+  "author": "Mathematic Inc",
   "publisher": "mathematic",
   "type": "module",
   "main": "./dist/extension.cjs",
   "scripts": {
-    "vscode:prepublish": "pnpm run package",
     "build": "tsup",
-    "watch": "tsup --watch",
-    "package": "tsup --minify",
-    "lint": "ultracite check",
-    "format": "ultracite fix",
-    "prepare": "lefthook install",
+    "check": "pnpm run typecheck && oxlint --deny-warnings . && oxfmt --check .",
     "deploy": "vsce publish",
-    "check": "ultracite check",
-    "fix": "ultracite fix"
-  },
-  "devDependencies": {
-    "@biomejs/biome": "^2.4.15",
-    "@types/glob": "^9.0.0",
-    "@types/mocha": "^10.0.10",
-    "@types/node": "^25.9.1",
-    "@types/vscode": "^1.120.0",
-    "@vscode/test-electron": "^3.0.0",
-    "glob": "^13.0.6",
-    "lefthook": "^2.1.8",
-    "mocha": "^11.7.6",
-    "oxfmt": "^0.65.0",
-    "oxlint": "^1.66.0",
-    "tsup": "^8.5.1",
-    "typescript": "^7.0.0",
-    "ultracite": "^7.8.0",
-    "vsce": "^2.15.0"
+    "fix": "oxlint --fix --deny-warnings . && oxfmt --write .",
+    "format": "oxfmt --write .",
+    "lint": "oxlint --deny-warnings .",
+    "package": "tsup --minify",
+    "prepare": "if [ -z \"$CI\" ] && command -v hk >/dev/null 2>&1; then hk install; fi",
+    "typecheck": "tsc --noEmit",
+    "vscode:prepublish": "pnpm run package",
+    "watch": "tsup --watch"
   },
   "contributes": {
+    "commands": [
+      {
+        "command": "apiLinter.lint",
+        "title": "API Linter: Lint the current file"
+      }
+    ],
     "configuration": {
       "type": "object",
       "title": "API Linter",
@@ -75,20 +65,23 @@
           "description": "Include paths to use for proto imports."
         }
       }
-    },
-    "commands": [
-      {
-        "command": "apiLinter.lint",
-        "title": "API Linter: Lint the current file"
-      }
-    ]
+    }
   },
   "activationEvents": [
     "onLanguage:proto",
     "onLanguage:proto3"
   ],
+  "devDependencies": {
+    "@types/node": "22.18.10",
+    "@types/vscode": "1.120.0",
+    "@vscode/vsce": "^3.9.2",
+    "oxfmt": "^0.65.0",
+    "oxlint": "^1.80.0",
+    "tsup": "^8.5.1",
+    "typescript": "^7.0.2"
+  },
+  "packageManager": "pnpm@11.24.0+sha512.bd27e345e976dcb0be0b7a1228217b049a817e21b1f355c90dbe7dc46671895a8bc1e6d06c24554505ea93ea0b45f489a27ec1bfbc8de6a9659fca0f16fa0000",
   "engines": {
     "vscode": "^1.120.0"
-  },
-  "packageManager": "pnpm@11.24.0"
+  }
 }

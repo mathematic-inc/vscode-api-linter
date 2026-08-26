@@ -1,6 +1,4 @@
 allowBuilds:
+  "@vscode/vsce-sign": true
   esbuild: true
   keytar: true
-  lefthook: true
-minimumReleaseAgeExclude:
-  - ultracite@7.8.0

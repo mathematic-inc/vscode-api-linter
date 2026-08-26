@@ -7,10 +7,7 @@ import { APILinter } from "./api-linter";
 
 const diagnostics = vscode.languages.createDiagnosticCollection("apiLinter");
 
-const findConfigFile = (
-  workspaceDir: string,
-  configFilePath: string
-): string | undefined => {
+const findConfigFile = (workspaceDir: string, configFilePath: string): string | undefined => {
   if (path.isAbsolute(configFilePath) && fs.existsSync(configFilePath)) {
     return configFilePath;
   }
@@ -18,6 +15,7 @@ const findConfigFile = (
   if (fs.existsSync(resolvedPath)) {
     return resolvedPath;
   }
+  return undefined;
 };
 
 export const activate = () => {
@@ -44,7 +42,7 @@ export const activate = () => {
     const workspaceFolder = vscode.workspace.getWorkspaceFolder(doc.uri);
     if (!workspaceFolder) {
       vscode.window.showErrorMessage(
-        "Cannot lint an unsaved file. Save the file in your workspace and try again."
+        "Cannot lint an unsaved file. Save the file in your workspace and try again.",
       );
       return;
     }
@@ -56,17 +54,14 @@ export const activate = () => {
     linter.setCommand(config.get("command") as string[]);
     if (!linter.isInstalled()) {
       vscode.window.showErrorMessage(
-        "`api-linter` is not installed. Follow the instructions here: https://linter.aip.dev/#installation"
+        "`api-linter` is not installed. Follow the instructions here: https://linter.aip.dev/#installation",
       );
       return;
     }
 
     // Set other options.
     linter.setConfigFile(
-      findConfigFile(
-        workspaceFolder.uri.fsPath,
-        config.get("configFile") as string
-      )
+      findConfigFile(workspaceFolder.uri.fsPath, config.get("configFile") as string),
     );
     linter.setProtoPaths(config.get("protoPaths") as string[]);
 

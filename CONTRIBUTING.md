@@ -6,10 +6,19 @@ Mathematic uses AI agents to maintain this repository. Reviewing an unsolicited 
 
 If you want to contribute:
 
-1. [Start a Discussion](../../discussions/new) describing the problem and your proposed solution.
+1. [Start a Discussion](https://github.com/mathematic-inc/vscode-api-linter/discussions/new) describing the problem and your proposed solution.
 2. Wait for a Mathematic maintainer to review the proposal and decide whether to implement it.
 3. If we accept the proposal, a Mathematic maintainer or agent will open the pull request.
 
 When we implement your proposal, the pull request will link to the Discussion and credit you as the proposal's original author.
 
 GitHub restricts pull request creation to Mathematic maintainers and repository collaborators with write, maintain, or admin access, plus authorized maintenance agents. Everyone else should use Discussions.
+
+## Local setup
+
+Install the pinned tools and Git hooks before working in the repository:
+
+```sh
+mise install
+hk install
+```

@@ -27,11 +27,11 @@ interface Position {
 const toRange = (location: Location): vscode.Range => {
   const start = new vscode.Position(
     location.start_position.line_number - 1,
-    location.start_position.column_number - 1
+    location.start_position.column_number - 1,
   );
   const end = new vscode.Position(
     location.end_position.line_number - 1,
-    location.end_position.column_number - 1
+    location.end_position.column_number - 1,
   );
   return new vscode.Range(start, end);
 };
@@ -44,7 +44,7 @@ export class APILinter {
   readonly #channel: vscode.OutputChannel;
   #configFile?: string;
   #protoPaths: string[] = [];
-  #command: string[] = ["api-linter"];
+  #command: [string, ...string[]] = ["api-linter"];
   #workspacePath?: string;
 
   #isInstalled = false;
@@ -57,10 +57,15 @@ export class APILinter {
   }
 
   setCommand(command: string[]) {
-    if (command.join(" ") === this.#command.join(" ")) {
+    const [executable, ...args] = command;
+    if (!executable) {
       return;
     }
-    this.#command = command;
+    const nextCommand: [string, ...string[]] = [executable, ...args];
+    if (nextCommand.join(" ") === this.#command.join(" ")) {
+      return;
+    }
+    this.#command = nextCommand;
     this.#isInstallationChecked = false;
   }
 
@@ -89,36 +94,34 @@ export class APILinter {
       return this.#isInstalled;
     }
     this.#isInstallationChecked = true;
-    const result = cp.spawnSync(
-      this.#command[0],
-      [...this.#command.slice(1), "--version"],
-      { cwd: this.#workspacePath, encoding: "utf-8" }
-    );
+    const result = cp.spawnSync(this.#command[0], [...this.#command.slice(1), "--version"], {
+      cwd: this.#workspacePath,
+      encoding: "utf-8",
+    });
     this.#isInstalled = result.status === 0;
     return this.#isInstalled;
   }
 
   *lint(file: string): Iterable<vscode.Diagnostic> {
     this.#channel.appendLine(`Linting ${file}...`);
-    this.#channel.appendLine(
-      `Command: ${this.#command.join(" ")} ${file} ${this.#args.join(" ")}`
-    );
+    this.#channel.appendLine(`Command: ${this.#command.join(" ")} ${file} ${this.#args.join(" ")}`);
     const result = cp.spawnSync(
       this.#command[0],
       [...this.#command.slice(1), file, ...this.#args],
-      { cwd: this.#workspacePath, encoding: "utf-8" }
+      { cwd: this.#workspacePath, encoding: "utf-8" },
     );
     if (result.status === 0) {
       const output: Output[] = JSON.parse(result.stdout);
-      if (output.length !== 1) {
+      const [firstOutput] = output;
+      if (output.length !== 1 || !firstOutput) {
         return;
       }
 
-      for (const p of output[0].problems) {
+      for (const p of firstOutput.problems) {
         const problem = new vscode.Diagnostic(
           toRange(p.location),
           p.message,
-          vscode.DiagnosticSeverity.Warning
+          vscode.DiagnosticSeverity.Warning,
         );
         problem.code = {
           target: vscode.Uri.parse(p.rule_doc_uri),
@@ -128,17 +131,22 @@ export class APILinter {
         yield problem;
       }
     } else {
-      result.stderr = result.stderr.split(" ").slice(2).join(" ");
-      this.#channel.appendLine(result.stderr);
-      for (const line of result.stderr.split("\n")) {
-        const [fileAndLine, ...messageParts] = line.split(" ");
+      const stderr = result.stderr.toString().split(" ").slice(2).join(" ");
+      this.#channel.appendLine(stderr);
+      for (const line of stderr.split("\n")) {
+        const [fileAndLine = "", ...messageParts] = line.split(" ");
         const [filePath, lineNo, column] = fileAndLine.split(":");
         const message = messageParts.join(" ");
         if (filePath === file) {
           yield new vscode.Diagnostic(
-            new vscode.Range(+lineNo - 1, +column, +lineNo - 1, +column),
+            new vscode.Range(
+              Number(lineNo) - 1,
+              Number(column),
+              Number(lineNo) - 1,
+              Number(column),
+            ),
             message,
-            vscode.DiagnosticSeverity.Error
+            vscode.DiagnosticSeverity.Error,
           );
         }
       }

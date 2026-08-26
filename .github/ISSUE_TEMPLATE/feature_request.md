@@ -7,7 +7,7 @@ labels: enhancement
 
 ## Is your feature request related to a problem? <sup>\*</sup>
 
-{{A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]}}
+{{A clear and concise description of what the problem is. Ex. I'm always frustrated when […]}}
 
 ## Describe the solution you'd like<sup>\*</sup>
 

@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.2.6](https://github.com/mathematic-inc/vscode-api-linter/compare/v1.2.5...v1.2.6) (2026-08-27)
+
+### Bug Fixes
+
+- Align VS Code engine with API types ([018aeeb](https://github.com/mathematic-inc/vscode-api-linter/commit/018aeeb2700edfb27639bb8630970df3f5b6820a))
+
 ## [1.2.5](https://github.com/mathematic-inc/vscode-api-linter/compare/v1.2.4...v1.2.5) (2026-08-27)
 
 ### Bug Fixes

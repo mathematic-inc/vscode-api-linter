@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.2.5](https://github.com/mathematic-inc/vscode-api-linter/compare/v1.2.4...v1.2.5) (2026-08-27)
+
+
+### Bug Fixes
+
+* **deps:** Override vulnerable esbuild version ([96b7564](https://github.com/mathematic-inc/vscode-api-linter/commit/96b75640b8d4058d0447ea69e1a116288731f9d5))
+* Satisfy current lint rule ([2b338d4](https://github.com/mathematic-inc/vscode-api-linter/commit/2b338d4c48f90079315a8c49c802692d9bacf83e))
+
 ## [1.2.4](https://github.com/mathematic-inc/vscode-api-linter/compare/v1.2.3...v1.2.4) (2026-06-01)
 
 ### Bug Fixes

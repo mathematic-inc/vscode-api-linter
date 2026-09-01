@@ -18,7 +18,23 @@ const findConfigFile = (workspaceDir: string, configFilePath: string): string | 
   return undefined;
 };
 
-export const activate = () => {
+export const activate = (context: vscode.ExtensionContext) => {
+  if (!context.globalState.get<boolean>("supportPromptShown")) {
+    void context.globalState.update("supportPromptShown", true);
+    void vscode.window
+      .showInformationMessage(
+        "Mathematic is a 501(c)(3) non-profit. Please consider supporting our free, open-source work.",
+        "Support Mathematic",
+      )
+      .then((selection) => {
+        if (selection === "Support Mathematic") {
+          void vscode.env.openExternal(
+            vscode.Uri.parse("https://github.com/sponsors/mathematic-inc"),
+          );
+        }
+      });
+  }
+
   const channel = vscode.window.createOutputChannel("API Linter");
   const linter = new APILinter(channel);
 

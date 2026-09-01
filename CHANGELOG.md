@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/mathematic-inc/vscode-api-linter/compare/v1.2.6...v1.3.0) (2026-09-01)
+
+
+### Features
+
+* Add one-time nonprofit support prompt ([#224](https://github.com/mathematic-inc/vscode-api-linter/issues/224)) ([5a6f26e](https://github.com/mathematic-inc/vscode-api-linter/commit/5a6f26edf6a798a8c7c96e78371b87c8214243f5))
+
 ## [1.2.6](https://github.com/mathematic-inc/vscode-api-linter/compare/v1.2.5...v1.2.6) (2026-08-27)
 
 ### Bug Fixes

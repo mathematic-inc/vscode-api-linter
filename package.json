@@ -68,6 +68,7 @@
     }
   },
   "activationEvents": [
+    "onStartupFinished",
     "onLanguage:proto",
     "onLanguage:proto3"
   ],

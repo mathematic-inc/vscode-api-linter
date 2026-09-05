@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.1](https://github.com/mathematic-inc/vscode-api-linter/compare/v1.3.0...v1.3.1) (2026-09-05)
+
+
+### Bug Fixes
+
+* **ci:** Harden release workflows and repository checks ([#227](https://github.com/mathematic-inc/vscode-api-linter/issues/227)) ([a55058d](https://github.com/mathematic-inc/vscode-api-linter/commit/a55058d34e071e08f674357ba31f094ee56c73e7))
+
 ## [1.3.0](https://github.com/mathematic-inc/vscode-api-linter/compare/v1.2.6...v1.3.0) (2026-09-01)
 
 

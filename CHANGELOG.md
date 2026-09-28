@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.2](https://github.com/mathematic-inc/vscode-api-linter/compare/v1.3.1...v1.3.2) (2026-09-25)
+
+
+### Bug Fixes
+
+* **deps:** Remediate vulnerable transitive packages ([c029ad7](https://github.com/mathematic-inc/vscode-api-linter/commit/c029ad7a171de00065575936a9ae1e1a35e5d614))
+
 ## [1.3.1](https://github.com/mathematic-inc/vscode-api-linter/compare/v1.3.0...v1.3.1) (2026-09-05)
 
 ### Bug Fixes

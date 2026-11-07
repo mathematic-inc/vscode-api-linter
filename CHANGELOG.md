@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.4](https://github.com/mathematic-inc/vscode-api-linter/compare/v1.3.3...v1.3.4) (2026-11-07)
+
+
+### Bug Fixes
+
+* Replace deprecated APIs and tooling ([#275](https://github.com/mathematic-inc/vscode-api-linter/issues/275)) ([56404e4](https://github.com/mathematic-inc/vscode-api-linter/commit/56404e4426eb4141191cbba7a1f0a4e3601b2f4d))
+
 ## [1.3.3](https://github.com/mathematic-inc/vscode-api-linter/compare/v1.3.2...v1.3.3) (2026-11-07)
 
 

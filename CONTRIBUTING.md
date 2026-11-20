@@ -24,9 +24,15 @@ agents. Everyone else should use Discussions.
 
 ## Local setup
 
-Install the pinned tools and Git hooks before working in the repository:
+Install the pinned tools, write the settings files of the tools and install the
+Git hooks before working in the repository. ToolConfig writes the settings files
+from `.toolconfig.pkl`, and Git ignores them.
 
 ```sh
 mise install
+mise run generate
 hk install
 ```
+
+Run `mise run check` to check every file. Run `mise run fix` to fix what hk can
+fix.

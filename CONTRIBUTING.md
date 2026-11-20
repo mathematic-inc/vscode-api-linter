@@ -1,24 +1,38 @@
 # Contributing
 
-Mathematic uses AI agents to maintain this repository. Reviewing an unsolicited pull request usually takes longer than having an agent implement a proposal after we have agreed on it.
+Mathematic uses AI agents to maintain this repository. Reviewing an unsolicited
+pull request usually takes longer than having an agent implement a proposal
+after we have agreed on it.
 
 ## Start with a Discussion
 
 If you want to contribute:
 
-1. [Start a Discussion](https://github.com/mathematic-inc/vscode-api-linter/discussions/new) describing the problem and your proposed solution.
-2. Wait for a Mathematic maintainer to review the proposal and decide whether to implement it.
-3. If we accept the proposal, a Mathematic maintainer or agent will open the pull request.
+1. [Start a Discussion](https://github.com/mathematic-inc/vscode-api-linter/discussions/new)
+   describing the problem and your proposed solution.
+2. Wait for a Mathematic maintainer to review the proposal and decide whether to
+   implement it.
+3. If we accept the proposal, a Mathematic maintainer or agent will open the
+   pull request.
 
-When we implement your proposal, the pull request will link to the Discussion and credit you as the proposal's original author.
+When we implement your proposal, the pull request will link to the Discussion
+and credit you as the proposal's original author.
 
-GitHub restricts pull request creation to Mathematic maintainers and repository collaborators with write, maintain, or admin access, plus authorized maintenance agents. Everyone else should use Discussions.
+GitHub restricts pull request creation to Mathematic maintainers and repository
+collaborators with write, maintain, or admin access, plus authorized maintenance
+agents. Everyone else should use Discussions.
 
 ## Local setup
 
-Install the pinned tools and Git hooks before working in the repository:
+Install the pinned tools, write the settings files of the tools and install the
+Git hooks before working in the repository. ToolConfig writes the settings files
+from `.toolconfig.pkl`, and Git ignores them.
 
 ```sh
 mise install
+mise run generate
 hk install
 ```
+
+Run `mise run check` to check every file. Run `mise run fix` to fix what hk can
+fix.

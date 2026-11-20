@@ -19,7 +19,7 @@ const findConfigFile = (workspaceDir: string, configFilePath: string): string | 
 };
 
 export const activate = (context: vscode.ExtensionContext) => {
-  if (!context.globalState.get<boolean>("supportPromptShown")) {
+  if (context.globalState.get<boolean>("supportPromptShown") !== true) {
     void context.globalState.update("supportPromptShown", true);
     void vscode.window
       .showInformationMessage(
@@ -67,7 +67,7 @@ export const activate = (context: vscode.ExtensionContext) => {
 
     // Set the command and workspace and check for existence.
     linter.setWorkspacePath(workspaceFolder.uri.fsPath);
-    linter.setCommand(config.get("command") as string[]);
+    linter.setCommand(config.get<string[]>("command", ["api-linter"]));
     if (!linter.isInstalled()) {
       vscode.window.showErrorMessage(
         "`api-linter` is not installed. Follow the instructions here: https://linter.aip.dev/#installation",
@@ -77,9 +77,12 @@ export const activate = (context: vscode.ExtensionContext) => {
 
     // Set other options.
     linter.setConfigFile(
-      findConfigFile(workspaceFolder.uri.fsPath, config.get("configFile") as string),
+      findConfigFile(
+        workspaceFolder.uri.fsPath,
+        config.get<string>("configFile", ".apilinter.yml"),
+      ),
     );
-    linter.setProtoPaths(config.get("protoPaths") as string[]);
+    linter.setProtoPaths(config.get<string[]>("protoPaths", []));
 
     // Lint the file.
     const filePath = vscode.workspace.asRelativePath(doc.uri, false);

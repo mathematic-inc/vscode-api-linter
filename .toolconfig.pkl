@@ -1,0 +1,34 @@
+amends
+  "package://github.com/mathematic-inc/toolconfig/releases/download/v2026.11.6/toolconfig@2026.11.6#/ToolConfig.pkl"
+
+root = true
+
+toolconfig {
+  `extends` =
+    List(new Repository {
+      git = "https://github.com/mathematic-inc/toolconfig-config.git"
+      rev = "fc76ddad46c14a7b7fe03bf117a92ede11ea0dfb"
+      path = "profiles/org/.toolconfig.pkl"
+    })
+}
+
+sections {
+  ["*"] {
+    oxlint {
+      rules {
+        // The rule cannot see the vscode types as readonly: they have methods and mutable arrays.
+        ["typescript/prefer-readonly-parameter-types"] {
+          "deny"
+          new {
+            allow =
+              List(new Dynamic {
+                from = "package"
+                package = "vscode"
+                name = List("ExtensionContext", "OutputChannel")
+              })
+          }
+        }
+      }
+    }
+  }
+}

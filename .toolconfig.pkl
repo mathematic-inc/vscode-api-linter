@@ -11,3 +11,24 @@ toolconfig {
       path = "profiles/org/.toolconfig.pkl"
     })
 }
+
+sections {
+  ["*"] {
+    oxlint {
+      rules {
+        // The rule cannot see the vscode types as readonly: they have methods and mutable arrays.
+        ["typescript/prefer-readonly-parameter-types"] {
+          "deny"
+          new {
+            allow =
+              List(new Dynamic {
+                from = "package"
+                package = "vscode"
+                name = List("ExtensionContext", "OutputChannel")
+              })
+          }
+        }
+      }
+    }
+  }
+}

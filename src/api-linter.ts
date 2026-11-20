@@ -3,26 +3,54 @@ import * as cp from "node:child_process";
 import * as vscode from "vscode";
 
 interface Output {
-  file_path: string;
-  problems: Problem[];
+  readonly file_path: string;
+  readonly problems: readonly Problem[];
 }
 
 interface Problem {
-  location: Location;
-  message: string;
-  rule_doc_uri: string;
-  rule_id: string;
+  readonly location: Location;
+  readonly message: string;
+  readonly rule_doc_uri: string;
+  readonly rule_id: string;
 }
 
 interface Location {
-  end_position: Position;
-  start_position: Position;
+  readonly end_position: Position;
+  readonly start_position: Position;
 }
 
 interface Position {
-  column_number: number;
-  line_number: number;
+  readonly column_number: number;
+  readonly line_number: number;
 }
+
+const isRecord = (value: unknown): value is Readonly<Record<string, unknown>> =>
+  typeof value === "object" && value !== null;
+
+const isPosition = (value: unknown): value is Position =>
+  isRecord(value) &&
+  typeof value.column_number === "number" &&
+  typeof value.line_number === "number";
+
+const isLocation = (value: unknown): value is Location =>
+  isRecord(value) && isPosition(value.end_position) && isPosition(value.start_position);
+
+const isProblem = (value: unknown): value is Problem =>
+  isRecord(value) &&
+  isLocation(value.location) &&
+  typeof value.message === "string" &&
+  typeof value.rule_doc_uri === "string" &&
+  typeof value.rule_id === "string";
+
+const isOutputs = (value: unknown): value is readonly Output[] =>
+  Array.isArray(value) &&
+  value.every(
+    (output: unknown) =>
+      isRecord(output) &&
+      typeof output.file_path === "string" &&
+      Array.isArray(output.problems) &&
+      output.problems.every(isProblem),
+  );
 
 const toRange = (location: Location): vscode.Range => {
   const start = new vscode.Position(
@@ -43,7 +71,7 @@ export interface APILinterOptions {
 export class APILinter {
   readonly #channel: vscode.OutputChannel;
   #configFile?: string;
-  #protoPaths: string[] = [];
+  #protoPaths: readonly string[] = [];
   #command: [string, ...string[]] = ["api-linter"];
   #workspacePath?: string;
 
@@ -56,9 +84,9 @@ export class APILinter {
     this.#channel = channel;
   }
 
-  setCommand(command: string[]) {
+  setCommand(command: readonly string[]) {
     const [executable, ...args] = command;
-    if (!executable) {
+    if (executable === undefined || executable === "") {
       return;
     }
     const nextCommand: [string, ...string[]] = [executable, ...args];
@@ -77,7 +105,7 @@ export class APILinter {
     this.#updateArguments();
   }
 
-  setProtoPaths(protoPaths: string[]) {
+  setProtoPaths(protoPaths: readonly string[]) {
     if (protoPaths.join(",") === this.#protoPaths.join(",")) {
       return;
     }
@@ -111,7 +139,10 @@ export class APILinter {
       { cwd: this.#workspacePath, encoding: "utf-8" },
     );
     if (result.status === 0) {
-      const output: Output[] = JSON.parse(result.stdout);
+      const output: unknown = JSON.parse(result.stdout);
+      if (!isOutputs(output)) {
+        return;
+      }
       const [firstOutput] = output;
       if (output.length !== 1 || !firstOutput) {
         return;
@@ -131,7 +162,7 @@ export class APILinter {
         yield problem;
       }
     } else {
-      const stderr = result.stderr.toString().split(" ").slice(2).join(" ");
+      const stderr = result.stderr.split(" ").slice(2).join(" ");
       this.#channel.appendLine(stderr);
       for (const line of stderr.split("\n")) {
         const [fileAndLine = "", ...messageParts] = line.split(" ");
@@ -155,7 +186,7 @@ export class APILinter {
 
   #updateArguments() {
     this.#args = ["--output-format", "json"];
-    if (this.#configFile) {
+    if (this.#configFile !== undefined && this.#configFile !== "") {
       this.#args.push("--config", this.#configFile);
     }
     for (const path of this.#protoPaths) {
